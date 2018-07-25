@@ -1,9 +1,23 @@
 <resources>
     <string name="app_name">Eve</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
+
+    <string name="nav_header_title">Placeholder</string>
+    <string name="nav_header_subtitle">Placeholder 2</string>
+
+
     <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="wikiPlaceholder">Wiki Fragment Placeholder Text</string>
+    <string name="directionsPlaceholder">Directions Fragment Placeholder Text</string>
+    <string name="newsPlaceholder">News Fragment Placeholder Text</string>
+    <string name="transitPlaceholder">Transit Fragment Placeholder Text</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="eveIntroPlaceholder">Welcome To Eve! Eve is a...</string>
+
 </resources>
