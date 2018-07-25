@@ -1,11 +1,7 @@
 package com.dankov.eve;
 
-import android.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -31,10 +27,10 @@ public class ServiceNavigator extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        switchToDefaultFragment();
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        switchToFragment(null);
     }
 
     @Override
@@ -74,14 +70,14 @@ public class ServiceNavigator extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
 
-        switchToFragment(item);
+        switchToNavFragment(item);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    public void switchToFragment(MenuItem item) {
+    public void switchToNavFragment(MenuItem item) {
         setTitle(item.getTitle());
 
         FragmentManager fm = getSupportFragmentManager();
@@ -106,10 +102,15 @@ public class ServiceNavigator extends AppCompatActivity
                 break;
 
             default:
-                service = new DefaultFragment();
                 return;
         }
 
+        fm.beginTransaction().replace(R.id.serviceFragment, service).commit();
+    }
+
+    public void switchToDefaultFragment() {
+        FragmentManager fm = getSupportFragmentManager();
+        ServiceFragment service = new DefaultFragment();
         fm.beginTransaction().replace(R.id.serviceFragment, service).commit();
     }
 }
