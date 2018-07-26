@@ -5,11 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".WikiFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/wikiPlaceholder" />
+        android:gravity="center_horizontal"
+        android:textSize="25sp"
+        android:layout_marginTop="10dp"
+        android:text="@string/wikiSubtitle" />
 
     <Button
         android:id="@+id/wikiButton"
@@ -21,14 +23,17 @@
         android:text="@string/wikiButtonText" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/wikiSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="198dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:inputType="text"
+        android:gravity="center"
+        android:imeOptions="actionDone"
+        android:singleLine="true"
+        android:hint="@string/wikiSearchText" />
 
 </RelativeLayout>
