@@ -1,6 +1,8 @@
 package com.dankov.eve;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
@@ -19,6 +21,10 @@ import android.widget.Toast;
  */
 public class WikiFragment extends ServiceFragment {
 
+    AlertDialog.Builder dbBuilder;
+    AlertDialog db;
+    View dbView;
+
     EditText wikiSearch;
     Button wikiButton;
 
@@ -28,8 +34,11 @@ public class WikiFragment extends ServiceFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_wiki, container, false);
 
-        wikiSearch = (EditText) view.findViewById(R.id.wikiSearch);
-        wikiButton = (Button) view.findViewById(R.id.wikiButton);
+        dbBuilder = new AlertDialog.Builder(currActivity);
+        dbView = getLayoutInflater().inflate(R.layout.wiki_send_data_db, null);
+
+        wikiSearch = (EditText) dbView.findViewById(R.id.wikiSearch);
+        wikiButton = (Button) dbView.findViewById(R.id.wikiButton);
 
         wikiSearch.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -46,6 +55,17 @@ public class WikiFragment extends ServiceFragment {
                 sendWikiData();
             }
         });
+
+        dbBuilder.setView(dbView);
+        db = dbBuilder.create();
+
+        db.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            public void onDismiss(DialogInterface di) {
+                currActivity.openNav();
+            }
+        });
+
+        db.show();
 
         return view;
     }

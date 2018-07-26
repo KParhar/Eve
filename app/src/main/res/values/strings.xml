@@ -13,6 +13,7 @@
     <string name="wikiSubtitle">Use Eve to find information on Wikipedia while not being online!</string>
     <string name="wikiButtonText">Search</string>
     <string name="wikiSearchText">Wikipedia Entry...</string>
+    <string name="wikiArticle"></string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="directionsPlaceholder">Directions Fragment Placeholder Text</string>

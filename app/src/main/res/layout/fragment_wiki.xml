@@ -11,29 +11,6 @@
         android:gravity="center_horizontal"
         android:textSize="25sp"
         android:layout_marginTop="10dp"
-        android:text="@string/wikiSubtitle" />
-
-    <Button
-        android:id="@+id/wikiButton"
-        android:layout_width="160dp"
-        android:layout_height="80dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="230dp"
-        android:text="@string/wikiButtonText" />
-
-    <EditText
-        android:id="@+id/wikiSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="198dp"
-        android:ems="10"
-        android:inputType="text"
-        android:gravity="center"
-        android:imeOptions="actionDone"
-        android:singleLine="true"
-        android:hint="@string/wikiSearchText" />
+        android:text="@string/wikiArticle" />
 
 </RelativeLayout>

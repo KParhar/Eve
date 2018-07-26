@@ -14,13 +14,13 @@ public abstract class ServiceFragment extends Fragment {
 
     public static final String PHONE_NUMBER = "6474966326";
 
-    Activity currActivity;
+    ServiceNavigator currActivity;
     SmsManager sms;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        currActivity = getActivity();
+        currActivity = (ServiceNavigator) getActivity();
         initSMS(currActivity);
     }
 
