@@ -17,14 +17,11 @@ public abstract class ServiceFragment extends Fragment {
     Activity currActivity;
     SmsManager sms;
 
-    public abstract void init();
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         currActivity = getActivity();
         initSMS(currActivity);
-        init();
     }
 
     public boolean initSMS(Activity activity) {
