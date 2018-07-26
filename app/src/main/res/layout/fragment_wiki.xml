@@ -12,13 +12,13 @@
         android:text="@string/wikiPlaceholder" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/wikiButton"
         android:layout_width="160dp"
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="230dp"
-        android:text="Button" />
+        android:text="@string/wikiButtonText" />
 
     <EditText
         android:id="@+id/editText"

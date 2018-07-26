@@ -8,8 +8,9 @@
     <string name="nav_header_title">Placeholder</string>
     <string name="nav_header_subtitle">Placeholder 2</string>
 
-
     <string name="action_settings">Settings</string>
+
+    <string name="wikiButtonText">Search</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="wikiPlaceholder">Wiki Fragment Placeholder Text</string>
