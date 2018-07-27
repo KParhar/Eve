@@ -17,13 +17,6 @@ import android.view.View;
 public class ServiceNavigator extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    //TODO: ADD REFRESH ON LAST SELECT
-    MenuItem lastSelected = null;
-    /*Log.e("onBackPressed: ", "Test");
-        if(lastSelected != null) {
-            switchToNavFragment(lastSelected);
-        } else {*/
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,12 +27,9 @@ public class ServiceNavigator extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
-            public void onDrawerClosed(View view) {
-                if(lastSelected != null) {
-                    switchToNavFragment(lastSelected);
-                } else {
-                    super.onDrawerClosed(view);
-                }
+            public void onDrawerOpened(View view) {
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN);
             }
         };
 
@@ -88,7 +78,6 @@ public class ServiceNavigator extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        lastSelected = item;
         switchToNavFragment(item);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

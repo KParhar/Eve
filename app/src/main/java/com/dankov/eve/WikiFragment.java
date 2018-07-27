@@ -2,11 +2,15 @@ package com.dankov.eve;
 
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.AttributeSet;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -76,12 +80,12 @@ public class WikiFragment extends ServiceFragment {
         return view;
     }
 
-    void sendWikiData() {
+    public void sendWikiData() {
         if(!wikiSearch.getText().toString().isEmpty()) {
             sendSMS("wiki " + wikiSearch.getText().toString());
-            db.hide();
             wikiArticle.setText("Loading Article");
             wikiSearch.setText("");
+            db.hide();
         } else {
             Toast.makeText(currActivity.getApplicationContext(), "Enter the Data", Toast.LENGTH_SHORT).show();
         }
