@@ -22,8 +22,12 @@ import java.util.List;
 
 public class ServiceNavigator extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private SMSReciever smsReciever;
-    List<ServiceFragment> classes;
+
+    SMSReciever smsReciever;
+
+    int currentService = 0;
+    List<ServiceFragment> services;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +53,8 @@ public class ServiceNavigator extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //This is a list of essentially modules that have been instantiated
-        classes = new ArrayList<>();
-
+        services = new ArrayList<>();
+        loadServices();
 
         //This is our SMS Reciever
         //First argument is the twilio phone number
@@ -63,7 +67,7 @@ public class ServiceNavigator extends AppCompatActivity
             @Override
             public void onTextReceived(String text) {
                 Log.d("SMSReciever",text);
-                WikiFragment.instance().onRecieve(text);/*
+                WikiFragment.instance().recieveSMS(text);/*
                 for(ServiceFragment s : classes){
                     if(text.startsWith(s.prefix())){
                         s.onRecieve(text);
@@ -71,6 +75,7 @@ public class ServiceNavigator extends AppCompatActivity
                 }*/
             }
         });
+
         Log.d("SMSReciever","Eve has been initialized");
     }
 
@@ -117,36 +122,40 @@ public class ServiceNavigator extends AppCompatActivity
         return true;
     }
 
+    public void loadServices() {
+        services.add(new DefaultFragment());
+        services.add(new WikiFragment());
+        services.add(new DirectionsFragment());
+        services.add(new NewsFragment());
+        services.add(new TransitFragment());
+    }
+
     public void switchToNavFragment(MenuItem item) {
         setTitle(item.getTitle());
 
         FragmentManager fm = getSupportFragmentManager();
 
-        ServiceFragment service;
-
         switch(item.getItemId()) {
             case R.id.nav_wiki:
-                service = new WikiFragment();
+                currentService = 1;
                 break;
 
             case R.id.nav_directions:
-                service = new DirectionsFragment();
+                currentService = 2;
                 break;
 
             case R.id.nav_news:
-                service = new NewsFragment();
+                currentService = 3;
                 break;
 
             case R.id.nav_transit:
-                service = new TransitFragment();
+                currentService = 4;
                 break;
             default:
                 return;
         }
-        if(service != null) {
-            classes.add(service);
-        }
-        fm.beginTransaction().replace(R.id.serviceFragment, service).commit();
+
+        fm.beginTransaction().replace(R.id.serviceFragment, services.get(currentService)).commit();
     }
 
     public void switchToDefaultFragment() {

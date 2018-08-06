@@ -92,8 +92,9 @@ public class WikiFragment extends ServiceFragment {
             Toast.makeText(currActivity.getApplicationContext(), "Enter the Data", Toast.LENGTH_SHORT).show();
         }
     }
+
     @Override
-    public void onRecieve(String text){
+    public void recieveSMS(String text){
         wikiArticle.setText(text);
 
     }

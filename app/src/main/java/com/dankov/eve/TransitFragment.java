@@ -22,4 +22,9 @@ public class TransitFragment extends ServiceFragment {
         return view;
     }
 
+    @Override
+    public void recieveSMS(String text) {
+
+    }
+
 }

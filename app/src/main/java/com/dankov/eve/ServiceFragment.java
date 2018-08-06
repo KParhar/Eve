@@ -45,6 +45,8 @@ public abstract class ServiceFragment extends Fragment {
         }
     }
 
+    public abstract void recieveSMS(String text);
+
     public boolean sendSMS(String message) {
         if(initSMS(currActivity)) {
             sms.sendTextMessage(PHONE_NUMBER, null, message, null, null);
@@ -53,9 +55,7 @@ public abstract class ServiceFragment extends Fragment {
             return false;
         }
     }
-    public void onRecieve(String text){
 
-    }
     public String prefix(){ return ""; }
 
 

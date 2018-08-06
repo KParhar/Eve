@@ -9,6 +9,7 @@ import android.provider.Telephony;
 import android.telephony.SmsMessage;
 import android.util.Log;
 import android.widget.Toast;
+
 public class SMSReciever extends BroadcastReceiver{
     //https://android.jlelse.eu/detecting-sending-sms-on-android-8a154562597f
     private static final String TAG = "SMSReciever";

@@ -15,6 +15,11 @@ import android.view.ViewGroup;
 public class DefaultFragment extends ServiceFragment {
 
     @Override
+    public void recieveSMS(String text) {
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment

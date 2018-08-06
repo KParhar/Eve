@@ -22,4 +22,9 @@ public class NewsFragment extends ServiceFragment {
         return view;
     }
 
+    @Override
+    public void recieveSMS(String text) {
+
+    }
+
 }
