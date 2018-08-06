@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.text.method.ScrollingMovementMethod;
 import android.util.AttributeSet;
@@ -34,12 +35,15 @@ public class WikiFragment extends ServiceFragment {
 
     EditText wikiSearch;
     Button wikiButton;
+
+    FloatingActionButton openDB;
     TextView wikiArticle;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         inst = this;
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_wiki, container, false);
 
@@ -71,13 +75,15 @@ public class WikiFragment extends ServiceFragment {
         dbBuilder.setView(dbView);
         db = dbBuilder.create();
 
-        db.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            public void onDismiss(DialogInterface di) {
-                currActivity.openNav();
+        openDB = view.findViewById(R.id.wikiOpenSearch);
+        openDB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db.show();
             }
         });
 
-        db.show();
+        //db.show();
 
         return view;
     }

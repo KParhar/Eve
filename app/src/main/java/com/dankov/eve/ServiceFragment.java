@@ -16,6 +16,7 @@ public abstract class ServiceFragment extends Fragment {
 
     ServiceNavigator currActivity;
     SmsManager sms;
+
     static ServiceFragment inst;
     public static String prefix;
     public static ServiceFragment instance() {

@@ -40,7 +40,6 @@ public class ServiceNavigator extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             public void onDrawerOpened(View view) {
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN);
             }
         };
 
