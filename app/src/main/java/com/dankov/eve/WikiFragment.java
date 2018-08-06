@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.method.ScrollingMovementMethod;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -59,6 +60,7 @@ public class WikiFragment extends ServiceFragment {
                 return false;
             }
         });
+        wikiArticle.setMovementMethod(new ScrollingMovementMethod());
 
         wikiButton.setOnClickListener(new Button.OnClickListener(){
             public void onClick(View view) {
@@ -82,7 +84,7 @@ public class WikiFragment extends ServiceFragment {
 
     public void sendWikiData() {
         if(!wikiSearch.getText().toString().isEmpty()) {
-            sendSMS("wiki " + wikiSearch.getText().toString());
+            sendSMS("eve wiki " + wikiSearch.getText().toString());
             wikiArticle.setText("Loading Article");
             wikiSearch.setText("");
             db.hide();

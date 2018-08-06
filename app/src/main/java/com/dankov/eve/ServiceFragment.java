@@ -12,7 +12,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 public abstract class ServiceFragment extends Fragment {
-    public static final String PHONE_NUMBER = "6474966326";
+    public static final String PHONE_NUMBER = "6479516502";
 
     ServiceNavigator currActivity;
     SmsManager sms;

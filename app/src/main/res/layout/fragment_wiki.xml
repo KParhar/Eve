@@ -12,6 +12,8 @@
         android:gravity="center_horizontal"
         android:textSize="25sp"
         android:layout_marginTop="10dp"
-        android:text="@string/wikiArticleText" />
+        android:text="@string/wikiArticleText"
+        android:scrollbars = "vertical"
+        />
 
 </RelativeLayout>
