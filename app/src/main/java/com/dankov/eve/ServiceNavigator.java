@@ -16,9 +16,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+
 public class ServiceNavigator extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private SMSReciever smsReciever;
+    List<ServiceFragment> classes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +48,10 @@ public class ServiceNavigator extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //This is a list of essentially modules that have been instantiated
+        classes = new ArrayList<>();
+
+
         //This is our SMS Reciever
         //First argument is the twilio phone number
         //Second argument is like a header so like you can have the reciever only accept texts which start with "Twilio" or "我"
@@ -54,13 +63,14 @@ public class ServiceNavigator extends AppCompatActivity
             @Override
             public void onTextReceived(String text) {
                 Log.d("SMSReciever",text);
-                if(text.startsWith("wiki ")){
-                    WikiFragment.instance().onRecieve(text);
+                for(ServiceFragment s : classes){
+                    if(text.startsWith(s.prefix())){
+                        s.onRecieve(text);
+                    }
                 }
             }
         });
-        Log.d("SMSReciever","!!!!!!!!!!!!!!!!!!!!!!!!!!!!!????????????????????????");
-
+        Log.d("SMSReciever","Eve has been initialized");
     }
 
     @Override
@@ -129,11 +139,12 @@ public class ServiceNavigator extends AppCompatActivity
             case R.id.nav_transit:
                 service = new TransitFragment();
                 break;
-
             default:
                 return;
         }
-
+        if(service != null) {
+            classes.add(service);
+        }
         fm.beginTransaction().replace(R.id.serviceFragment, service).commit();
     }
 

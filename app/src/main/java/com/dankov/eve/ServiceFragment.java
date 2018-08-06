@@ -17,7 +17,7 @@ public abstract class ServiceFragment extends Fragment {
     ServiceNavigator currActivity;
     SmsManager sms;
     static ServiceFragment inst;
-
+    public static String prefix;
     public static ServiceFragment instance() {
         return inst;
     }
@@ -56,5 +56,7 @@ public abstract class ServiceFragment extends Fragment {
     public void onRecieve(String text){
 
     }
+    public String prefix(){ return ""; }
+
 
 }

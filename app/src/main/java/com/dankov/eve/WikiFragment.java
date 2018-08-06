@@ -93,6 +93,9 @@ public class WikiFragment extends ServiceFragment {
     @Override
     public void onRecieve(String text){
         wikiArticle.setText(text);
+
     }
+
+    public String prefix(){ return "wiki "; }
 
 }
