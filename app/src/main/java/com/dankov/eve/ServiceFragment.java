@@ -2,6 +2,7 @@ package com.dankov.eve;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
@@ -11,11 +12,15 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 public abstract class ServiceFragment extends Fragment {
-
     public static final String PHONE_NUMBER = "6474966326";
 
     ServiceNavigator currActivity;
     SmsManager sms;
+    static ServiceFragment inst;
+
+    public static ServiceFragment instance() {
+        return inst;
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -25,6 +30,10 @@ public abstract class ServiceFragment extends Fragment {
     }
 
     public boolean initSMS(Activity activity) {
+        if (ContextCompat.checkSelfPermission(activity, Manifest.permission.RECEIVE_SMS) == PackageManager.PERMISSION_GRANTED) {
+        } else {
+            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.RECEIVE_SMS}, 0);
+        }
         if (ContextCompat.checkSelfPermission(activity, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
             sms = SmsManager.getDefault();
             return true;
@@ -43,6 +52,9 @@ public abstract class ServiceFragment extends Fragment {
         } else {
             return false;
         }
+    }
+    public void onRecieve(String text){
+
     }
 
 }

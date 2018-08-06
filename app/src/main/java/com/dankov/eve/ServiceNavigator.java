@@ -1,5 +1,7 @@
 package com.dankov.eve;
 
+import android.content.IntentFilter;
+import android.provider.Telephony;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -16,7 +18,7 @@ import android.view.View;
 
 public class ServiceNavigator extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    private SMSReciever smsReciever;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +42,25 @@ public class ServiceNavigator extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //This is our SMS Reciever
+        //First argument is the twilio phone number
+        //Second argument is like a header so like you can have the reciever only accept texts which start with "Twilio" or "我"
+        //RN its disabled though for testing
+        smsReciever = new SMSReciever(ServiceFragment.PHONE_NUMBER, "Twilio");
+        registerReceiver(smsReciever, new IntentFilter(Telephony.Sms.Intents.SMS_RECEIVED_ACTION));
+
+        smsReciever.setListener(new SMSReciever.Listener(){
+            @Override
+            public void onTextReceived(String text) {
+                Log.d("SMSReciever",text);
+                if(text.startsWith("wiki ")){
+                    WikiFragment.instance().onRecieve(text);
+                }
+            }
+        });
+        Log.d("SMSReciever","!!!!!!!!!!!!!!!!!!!!!!!!!!!!!????????????????????????");
+
     }
 
     @Override

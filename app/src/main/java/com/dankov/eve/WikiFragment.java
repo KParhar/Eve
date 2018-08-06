@@ -33,12 +33,12 @@ public class WikiFragment extends ServiceFragment {
 
     EditText wikiSearch;
     Button wikiButton;
-
     TextView wikiArticle;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        inst = this;
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_wiki, container, false);
 
@@ -89,6 +89,10 @@ public class WikiFragment extends ServiceFragment {
         } else {
             Toast.makeText(currActivity.getApplicationContext(), "Enter the Data", Toast.LENGTH_SHORT).show();
         }
+    }
+    @Override
+    public void onRecieve(String text){
+        wikiArticle.setText(text);
     }
 
 }
