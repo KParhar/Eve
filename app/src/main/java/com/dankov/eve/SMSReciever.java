@@ -27,8 +27,11 @@ public class SMSReciever extends BroadcastReceiver{
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals(Telephony.Sms.Intents.SMS_RECEIVED_ACTION)) {
+            //SmsSender is who sent it
             String smsSender = "";
+            //smsBody is what was sent
             String smsBody = "";
+            //Check version of Android, if Kitkat use better method if not available use legacy
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 for (SmsMessage smsMessage : Telephony.Sms.Intents.getMessagesFromIntent(intent)) {
                     smsSender = smsMessage.getDisplayOriginatingAddress();
@@ -51,7 +54,8 @@ public class SMSReciever extends BroadcastReceiver{
                     smsSender = messages[0].getOriginatingAddress();
                 }
             }
-
+            //Right now this is commented out for testing
+            //What this does is restricts what message is put in to differentiate the recieved message from some random text
             if (/*smsSender.equals(serviceProviderNumber) && smsBody.startsWith(serviceProviderSmsCondition)*/true) {
                 if (listener != null) {
                     listener.onTextReceived(smsBody);
