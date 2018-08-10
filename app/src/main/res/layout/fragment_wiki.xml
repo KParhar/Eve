@@ -9,13 +9,14 @@
     <TextView
         android:id="@+id/wikiArticle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="452dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="12dp"
         android:gravity="center_horizontal"
-        android:textSize="25sp"
-        android:layout_marginTop="10dp"
+        android:scrollbars="vertical"
         android:text="@string/wikiArticleText"
-        android:scrollbars = "vertical"
-        />
+        android:textSize="25sp" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/wikiOpenSearch"
@@ -29,5 +30,14 @@
         android:layout_marginRight="34dp"
         android:clickable="true"
         android:src="@android:drawable/ic_menu_search" />
+
+    <TextView
+        android:id="@+id/wikiTitle"
+        android:layout_width="355dp"
+        android:layout_height="47dp"
+        android:layout_above="@+id/wikiArticle"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:textSize="24sp" />
 
 </RelativeLayout>

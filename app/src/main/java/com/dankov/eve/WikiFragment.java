@@ -38,6 +38,11 @@ public class WikiFragment extends ServiceFragment {
 
     FloatingActionButton openDB;
     TextView wikiArticle;
+    TextView wikiTitle;
+
+    //Character Codes
+    final char titleChar = '£';
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,7 +53,7 @@ public class WikiFragment extends ServiceFragment {
         View view = inflater.inflate(R.layout.fragment_wiki, container, false);
 
         wikiArticle = (TextView) view.findViewById(R.id.wikiArticle);
-
+        wikiTitle = (TextView) view.findViewById(R.id.wikiTitle);
         dbBuilder = new AlertDialog.Builder(currActivity);
         dbView = getLayoutInflater().inflate(R.layout.wiki_send_data_db, null);
 
@@ -101,6 +106,24 @@ public class WikiFragment extends ServiceFragment {
 
     @Override
     public void recieveSMS(String text){
+        //This won't run when were not using twilio trial
+        if(text.startsWith("Sent from your Twilio")){
+            int hyphenIndex = text.indexOf('-');
+            //We add 2 to hyphen index because theres a space after it
+            text = text.substring(hyphenIndex + 2);
+        }
+
+        //You cannot explicitly cast char to String
+        if(text.contains(titleChar + "")){
+            String title = "";
+            int firstChar = text.indexOf(titleChar);
+            title = text.substring(firstChar+1);
+            int secondChar = title.indexOf(titleChar);
+            title = title.substring(0,secondChar);
+            wikiTitle.setText(title + "");
+            text = text.substring(0,firstChar) + text.substring(secondChar+2);
+        }
+
         wikiArticle.setText(text);
 
     }
