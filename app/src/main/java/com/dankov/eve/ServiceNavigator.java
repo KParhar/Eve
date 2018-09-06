@@ -66,12 +66,11 @@ public class ServiceNavigator extends AppCompatActivity
             @Override
             public void onTextReceived(String text) {
                 Log.d("SMSReciever",text);
-                WikiFragment.instance().recieveSMS(text);/*
-                for(ServiceFragment s : classes){
+                for(ServiceFragment s : services){
                     if(text.startsWith(s.prefix())){
-                        s.onRecieve(text);
+                        s.recieveSMS(text);
                     }
-                }*/
+                }
             }
         });
 
