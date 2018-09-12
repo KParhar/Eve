@@ -67,7 +67,7 @@ public class ServiceNavigator extends AppCompatActivity
             public void onTextReceived(String text) {
                 Log.d("SMSReciever",text);
                 for(ServiceFragment s : services){
-                    if(text.startsWith(s.prefix())){
+                    if(text.contains(s.prefix())){
                         s.recieveSMS(text);
                     }
                 }

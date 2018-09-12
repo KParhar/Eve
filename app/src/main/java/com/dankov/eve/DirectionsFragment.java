@@ -25,16 +25,18 @@ public class DirectionsFragment extends ServiceFragment {
     AlertDialog db;
     View dbView;
 
-    EditText directionsSearch;
+    EditText directionsOrigin, directionsDestination;
     Button directionsButton;
 
     TextView directionsArticle;
     FloatingActionButton openDB;
+    public DirectionsFragment(){
+        prefix = "<D>";
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        prefix = "<D>";
         View view = inflater.inflate(R.layout.fragment_directions, container, false);
 
         directionsArticle = (TextView) view.findViewById(R.id.directionsArticle);
@@ -42,22 +44,22 @@ public class DirectionsFragment extends ServiceFragment {
         dbBuilder = new AlertDialog.Builder(currActivity);
         dbView = getLayoutInflater().inflate(R.layout.directions_send_data_db, null);
 
-        directionsSearch = (EditText) dbView.findViewById(R.id.directionsSearch);
+        directionsOrigin = (EditText) dbView.findViewById(R.id.directionsOrigin);
+        directionsDestination = (EditText) dbView.findViewById(R.id.directionsDestination);
         directionsButton = (Button) dbView.findViewById(R.id.directionsButton);
 
-        directionsSearch.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+        directionsButton.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    sendWikiData();
+                    sendDirectionsData();
                     return true;
                 }
                 return false;
             }
         });
-
         directionsButton.setOnClickListener(new Button.OnClickListener(){
             public void onClick(View view) {
-                sendWikiData();
+                sendDirectionsData();
             }
         });
 
@@ -75,15 +77,12 @@ public class DirectionsFragment extends ServiceFragment {
 
         return view;
     }
-    public void sendWikiData() {
-        if(!directionsSearch.getText().toString().isEmpty()) {
-            sendSMS("eve directions " + directionsSearch.getText().toString());
+    public void sendDirectionsData() {
+        if(!directionsDestination.getText().toString().isEmpty() || !directionsOrigin.getText().toString().isEmpty()) {
+            sendSMS("eve directions " + directionsOrigin.getText().toString() + "," + directionsDestination.getText().toString());
             directionsArticle.setText("");
-            directionsSearch.setText("");
-
-            db.hide();
-            directionsArticle.setText("Loading Article");
-            directionsSearch.setText("");
+            directionsDestination.setText("");
+            directionsOrigin.setText("");
             db.hide();
         } else {
             Toast.makeText(currActivity.getApplicationContext(), "Enter the Data", Toast.LENGTH_SHORT).show();
@@ -92,6 +91,9 @@ public class DirectionsFragment extends ServiceFragment {
 
     @Override
     public void recieveSMS(String text) {
-        directionsArticle.setText("?");
+        directionsArticle.setText(text);
+    }
+    public String prefix(){
+        return prefix;
     }
 }

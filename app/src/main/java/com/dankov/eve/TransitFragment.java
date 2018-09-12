@@ -30,6 +30,11 @@ public class TransitFragment extends ServiceFragment {
 
     TextView transitArticle;
     FloatingActionButton openDB;
+
+    public TransitFragment(){
+        prefix = "<Tr>";
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -89,5 +94,10 @@ public class TransitFragment extends ServiceFragment {
     @Override
     public void recieveSMS(String text) {
 
+    }
+
+    @Override
+    public String prefix() {
+        return prefix;
     }
 }

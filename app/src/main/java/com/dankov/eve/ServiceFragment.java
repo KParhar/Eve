@@ -18,7 +18,7 @@ public abstract class ServiceFragment extends Fragment {
     SmsManager sms;
 
     static ServiceFragment inst;
-    public static String prefix;
+    public String prefix;
     public static ServiceFragment instance() {
         return inst;
     }
@@ -57,7 +57,9 @@ public abstract class ServiceFragment extends Fragment {
         }
     }
 
-    public String prefix(){ return ""; }
+    public String prefix(){
+        return "///TUNNN";
+    }
 
 
 }

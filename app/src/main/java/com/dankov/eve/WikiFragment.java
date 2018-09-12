@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,12 +46,13 @@ public class WikiFragment extends ServiceFragment {
     //Character Codes
     final char titleChar = '£';
     TextView[] TOCTable;
-
+    public WikiFragment(){
+        prefix = "<W>";
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         inst = this;
-        prefix = "<W>";
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_wiki, container, false);
         rl = (LinearLayout) view.findViewById(R.id.scrolled_wiki);
@@ -94,7 +96,10 @@ public class WikiFragment extends ServiceFragment {
         //db.show();
         return view;
     }
-
+    /*
+    * Send Wiki Data
+    * eve wiki Wiki-Title
+    * */
     public void sendWikiData() {
         if(!wikiSearch.getText().toString().isEmpty()) {
             sendSMS("eve wiki " + wikiSearch.getText().toString());
@@ -117,6 +122,15 @@ public class WikiFragment extends ServiceFragment {
     }
     boolean isTOCTitle = false;
     String TOCTitleString = "";
+    /*Recieve Format
+    * Text 1.0
+    * <W><E>£Title£ text...
+    *
+    * Text 2.0
+    * <T> /S Table of Contents Title/s
+    *
+    * */
+
     @Override
     public void recieveSMS(String text){
         if(summaryTitle.getVisibility() == TextView.INVISIBLE){
@@ -128,7 +142,7 @@ public class WikiFragment extends ServiceFragment {
             //We add 2 to hyphen index because theres a space after it
             text = text.substring(hyphenIndex + 2);
         }
-        if(text.contains("<W>")) {
+        if(text.contains("<W>") && (!text.contains("<T>") || !text.contains("/T"))) {
             text = text.replaceAll("<W>","");
             //You cannot explicitly cast char to String
             if (text.contains(titleChar + "")) {
@@ -143,6 +157,7 @@ public class WikiFragment extends ServiceFragment {
             if (text.contains("<E>")) {
                 text = text.replaceFirst("<E>", "");
                 wikiArticle.setText(text);
+                Log.d("SMS","its somewhat working?");
             } else {
                 wikiArticle.append(text);
             }
@@ -183,6 +198,6 @@ public class WikiFragment extends ServiceFragment {
             textV.setVisibility(TextView.GONE);
         }
     }
-    public String prefix(){ return "wiki "; }
+    public String prefix(){ return prefix; }
 
 }

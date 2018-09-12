@@ -13,7 +13,9 @@ import android.view.ViewGroup;
  * A simple {@link Fragment} subclass.
  */
 public class NewsFragment extends ServiceFragment {
-
+    public NewsFragment(){
+        prefix = "<N>";
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -25,6 +27,9 @@ public class NewsFragment extends ServiceFragment {
     @Override
     public void recieveSMS(String text) {
 
+    }
+    public String prefix(){
+        return prefix;
     }
 
 }
