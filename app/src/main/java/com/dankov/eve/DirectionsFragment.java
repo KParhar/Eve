@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.commons.lang3.StringUtils;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +26,8 @@ public class DirectionsFragment extends ServiceFragment {
     AlertDialog.Builder dbBuilder;
     AlertDialog db;
     View dbView;
+    //Basically I decided do not update the screen until all the text has been recieved so thats what I am doing
+    String processWaitString = "";
 
     EditText directionsOrigin, directionsDestination;
     Button directionsButton;
@@ -79,7 +83,7 @@ public class DirectionsFragment extends ServiceFragment {
     }
     public void sendDirectionsData() {
         if(!directionsDestination.getText().toString().isEmpty() || !directionsOrigin.getText().toString().isEmpty()) {
-            sendSMS("eve directions " + directionsOrigin.getText().toString() + "," + directionsDestination.getText().toString());
+            sendSMS("eve directions " + directionsOrigin.getText().toString() + "*" + directionsDestination.getText().toString());
             directionsArticle.setText("");
             directionsDestination.setText("");
             directionsOrigin.setText("");
@@ -90,10 +94,39 @@ public class DirectionsFragment extends ServiceFragment {
     }
 
     @Override
-    public void recieveSMS(String text) {
-        directionsArticle.setText(text);
+    public void recieveSMS(String text)
+    {
+        if(text.contains("<D>")) {
+            if (text.startsWith("Sent from your Twilio")) {
+                int hyphenIndex = text.indexOf('-');
+                //We add 2 to hyphen index because theres a space after it
+                text = text.substring(hyphenIndex + 2);
+            }
+            text = text.replaceAll("<D>","");
+
+            if(text.contains("<.D>")){
+                text = text.replaceAll("<.D>","");
+                processWaitString += text;
+                processDirections();
+            }
+            else{
+                processWaitString += text;
+            }
+        }
     }
     public String prefix(){
         return prefix;
+    }
+    public void processDirections(){
+        String output = "";
+        String remainder = processWaitString;
+        int numberOfEntries = StringUtils.countMatches(processWaitString, "/D");
+
+        for (int i = 0; i < numberOfEntries; i++) {
+            output += remainder.substring(remainder.indexOf("/D")+2,remainder.indexOf("/d"));
+            remainder = remainder.substring(remainder.indexOf("/d")+2);
+
+        }
+        directionsArticle.setText(output);
     }
 }
