@@ -1,25 +1,5 @@
 <resources>
     <string name="app_name">Eve</string>
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_desc">Navigation header</string>
-
-    <string name="nav_header_title">Placeholder</string>
-    <string name="nav_header_subtitle">Placeholder 2</string>
-
     <string name="action_settings">Settings</string>
-
-    <string name="wikiButtonText">Search</string>
-    <string name="wikiSearchText">Wikipedia Entry...</string>
-    <string name="wikiArticleText"></string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="directionsPlaceholder">Directions Fragment Placeholder Text</string>
-    <string name="newsPlaceholder">News Fragment Placeholder Text</string>
-    <string name="transitPlaceholder">Transit Fragment Placeholder Text</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="eveIntroPlaceholder">Welcome To Eve! Eve is a...</string>
-
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>
