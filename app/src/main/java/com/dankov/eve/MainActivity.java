@@ -54,29 +54,46 @@ public class MainActivity extends AppCompatActivity {
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        Fragment screens[] = new Fragment[4];
+        //Fragment screens[] = new Fragment[4];
 
         ServiceSelector serviceSelector = new ServiceSelector();
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
 
-            screens[0] = new ServiceSelector();
-            screens[1] = new ServiceInput();
-            screens[2] = new ServiceLoading();
-            screens[3] = new ServiceOutput();
+            //screens[0] = new ServiceSelector();
+            //screens[1] = new ServiceInput();
+            //screens[2] = new ServiceLoading();
+            //screens[3] = new ServiceOutput();
         }
 
         @Override
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return ServiceSelector.instantiate(MainActivity.this, "");
+            return ServiceSelector.newInstance();
         }
 
         @Override
         public int getCount() {
-            return screens.length;
+            return 3;
+        }
+    }
+
+    public static class ScreenFragment extends Fragment {
+        public static ScreenFragment newInstance() {
+            ScreenFragment fragment = new ScreenFragment();
+            Bundle args = new Bundle();
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        public ScreenFragment() {}
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            return inflater.inflate(R.layout.fragment_main, container, false);
         }
     }
 }

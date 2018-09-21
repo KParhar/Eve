@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ServiceInput extends Fragment {
+public class ServiceInput extends MainActivity.ScreenFragment {
 
 
     public ServiceInput() {

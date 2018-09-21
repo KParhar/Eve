@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ServiceSelector extends Fragment {
+public class ServiceSelector extends MainActivity.ScreenFragment {
 
     public static final int NUMBER_SERVICES = 3;
     Button services[] = new Button[NUMBER_SERVICES];

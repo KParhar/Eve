@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ServiceLoading extends Fragment {
+public class ServiceLoading extends MainActivity.ScreenFragment {
 
 
     public ServiceLoading() {
